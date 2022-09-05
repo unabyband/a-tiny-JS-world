@@ -8,6 +8,53 @@
 // ======== OBJECTS DEFINITIONS ========
 // Define your objects here
 
+   const inhabitants = [
+      dog = {
+         species: 'dog',
+         name: 'Rex',
+         gender: 'male',
+         legs: 4,
+         hands: 0,
+         saying: 'woof',
+         friends: 'John, Jenny'
+      },
+      cat = {
+         species: 'cat',
+         name: 'Tom',
+         gender: 'male',
+         legs: 4,
+         hands: 0,
+         saying: 'meow',
+         friends: 'Jenny'
+      },
+      woman = {
+         species: 'human',
+         name: 'Jenny',
+         gender: 'female',
+         legs: 2,
+         hands: 2,
+         saying: 'Hi, John!',
+         friends: 'John, Tom'
+      },
+      man = {
+         species: 'human',
+         name: 'John',
+         gender: 'male',
+         legs: 2,
+         hands: 2,
+         saying: 'Hi, Jenny!',
+         friends: 'Jenny, Rex, Tom'
+      },
+      cat_woman = {
+         species: cat.species + '-' + woman.species,
+         name: woman.name,
+         gender: 'no gender',
+         legs: woman.legs,
+         hands: woman.hands,
+         saying: cat.saying,
+         friends: 0
+      }
+   ];
 
 // ======== OUTPUT ========
 /* Use print(message) for output.
@@ -28,4 +75,12 @@
    print('human; <strong>John</strong>; male; 2; 2; <em>Hello world!</em>; Rex, Tom, Jenny', 'div');
    */
 
+// var test = man;
+// test.saying = "<h2>Where's the money, Lebowski?</h2>";
 
+function printAll (args) {
+   print([args.species,'<strong>' + args.name + '</strong>', args.gender, args.legs, 
+         args.hands,'<em>' + args.saying + '</em>', args.friends].join('; '));
+}
+
+inhabitants.forEach(element => printAll(element));
