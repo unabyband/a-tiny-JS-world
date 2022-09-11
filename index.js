@@ -8,89 +8,80 @@
 // ======== OBJECTS DEFINITIONS ========
 // Define your objects here
 
+class Inhabitant {
+  constructor (species, name, gender, limbs, saying, friends = 'Cats have no friends!') {
+    this.species = species;
+    this.name = name;
+    this.gender = gender;
+    this.limbs = limbs;
+    this.saying = saying;
+    this.friends = friends;
+  }
+
+  printInhabitant () {
+    print(`${this.species}; <strong>${this.name}</strong>; ${this.gender}; ${this.limbs.join('; ')}; <em>${this.saying}</em>; ${this.friends}`);
+  }
+}
+
+class Human extends Inhabitant {
+  constructor (name, gender, saying, friends) {
+    super('human', name, gender, [2, 2], saying, friends);
+  }
+}
+
+class Animal extends Inhabitant {
+  constructor (name, gender, saying, friends) {
+    super('animal', name, gender, [4], saying, friends);
+  }
+}
+
+class Dog extends Animal {
+  constructor (name, gender, friends) {
+    super(name, gender, 'Bark!', friends);
+  }
+}
+
+class Cat extends Animal {
+  constructor (name, gender) {
+    super(name, gender, 'Meow!');
+  }
+}
+
 const inhabitants = [
-   (dog = {
-     species: "dog",
-     name: "Rex",
-     gender: "male",
-     legs: 4,
-     hands: 0,
-     saying: "woof",
-     friends: "John, Jenny",
-   }),
-   (cat = {
-     species: "cat",
-     name: "Tom",
-     gender: "male",
-     legs: 4,
-     hands: 0,
-     saying: "meow",
-     friends: "Jenny",
-   }),
-   (woman = {
-     species: "human",
-     name: "Jenny",
-     gender: "female",
-     legs: 2,
-     hands: 2,
-     saying: "Hi, John!",
-     friends: "John, Tom",
-   }),
-   (man = {
-     species: "human",
-     name: "John",
-     gender: "male",
-     legs: 2,
-     hands: 2,
-     saying: "Hi, Jenny!",
-     friends: "Jenny, Rex, Tom",
-   }),
-   (cat_woman = {
-     species: cat.species + "-" + woman.species,
-     name: woman.name,
-     gender: "no gender",
-     legs: woman.legs,
-     hands: woman.hands,
-     saying: cat.saying,
-     friends: 0,
-   }),
+  new Human('Jenny', 'female', "Hi all, I'm Jenny"),
+  new Human('Alice', 'female', "Whats up! Alice's here"),
+  new Human('Eva', 'female', "Hello, I am Eva"),
+  new Human('John', 'male', "Cheers, It's a John"),
+  new Human('Bob', 'male', "Peace folks, I'm Bob"),
+  new Human('Adam', 'male', "I am Adam, Hi buds!"),
+  new Cat('Tom', 'male'),
+  new Cat('Molly', 'female'),
+  new Dog('Rex', 'male'),
+  new Dog('Lizzy', 'female') 
  ];
  
- // ======== OUTPUT ========
- /* Use print(message) for output.
-    Default tag for message is <pre>. Use print(message,'div') to change containing element tag.
- 
-    Message can contain HTML markup. You may also tweak index.html and/or styles.css.
-    However, please, REFRAIN from improving visuals at least until your code is reviewed
-    so code reviewers might focus on a single file that is index.js.
-    */
- 
- /* Print examples:
-    print('ABC');
-    print('<strong>ABC</strong>');
-    print('<strong>ABC</strong>', 'div');
- 
-    print('human; John; male; 2; 2; Hello world!; Rex, Tom, Jenny');
-    print('human; <strong>John</strong>; male; 2; 2; <em>Hello world!</em>; Rex, Tom, Jenny');
-    print('human; <strong>John</strong>; male; 2; 2; <em>Hello world!</em>; Rex, Tom, Jenny', 'div');
-    */
- 
-//  var test = man;
-//  test.saying = "<h2>Where's the money, Lebowski?</h2>";
- 
-//  function printInhabitant(inhabitant) {
-//   let str = "";
-//   for (param in inhabitant) {
-//     str += inhabitant[param] + '; ';
-//   }
-//   print (str);
-//  }
+ /*Here's my function for adding friends to inhabitants, 
+ the first argument is index of subject at inhabitants array
+ all next arguments are indexes of his friends.
+ I know, it's optional, but hoping my solution is not too primitive*/
 
-function printInhabitant ({species, name, gender, legs, hands, saying, friends}) {
+ function addFriends(...arguments) {
+  let friendsList = [];
+  for(let i = 1; i < arguments.length; i++) {
+    friendsList.push(inhabitants[arguments[i]].name);
+  }
+  inhabitants[arguments[0]].friends = friendsList.join(', ');
+ }
 
-  const inhabitant = [species, "<strong>" + name + "</strong>", gender, legs, hands, "<em>" + saying + "</em>", friends];
-  print (inhabitant.join("; "));
-}
+addFriends(0, 3, 7);
+addFriends(1, 4, 5, 6);
+addFriends(2, 5, 6, 9);
+addFriends(3, 0, 7);
+addFriends(4, 1, 5, 6, 8);
+addFriends(5, 2, 6, 9);
+addFriends(8, 4);
+addFriends(9, 1, 2);
+
+ inhabitants.forEach((creature) => creature.printInhabitant());
  
- inhabitants.forEach((resident) => printInhabitant(resident));
  
