@@ -22,7 +22,7 @@ class Inhabitant {
   printInhabitant () {
     const nameToPrint = `<strong>${this.name}</strong>`;
     const talkToPrint = `<em>${this.saying}</em>`;
-    const friendsToPrint = this.friends ? this.friends.map(elem => elem.name).join(', ') : 'Cats have no friends';
+    const friendsToPrint = this.friends ? this.friends.map(friend => friend.name).join(', ') : 'Cats have no friends';
 
     print([this.species, nameToPrint, this.legs, this.hands, talkToPrint, friendsToPrint].join('; '));
   }
@@ -69,12 +69,12 @@ const inhabitants = [
   let friendsStorage = [];
   for (let i=0; i<friendsList.length; i++)
   {
-    inhabitants.forEach(elem => {if(elem.name == friendsList[i]) {
-    friendsStorage.push(elem);
+    inhabitants.forEach(friend => {if(friend.name == friendsList[i]) {
+    friendsStorage.push(friend);
   }});
   }
-  inhabitants.forEach(elem => {if(elem.name == person) {
-    elem.friends = friendsStorage;
+  inhabitants.forEach(inhabitant => {if(inhabitant.name == person) {
+    inhabitant.friends = friendsStorage;
   }});
 }
 
